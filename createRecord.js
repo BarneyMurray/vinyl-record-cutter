@@ -54,10 +54,14 @@ function setup() {
   uploadButton.position(10, 10);
   let saveButton = createButton("Save file");
   saveButton.mousePressed(saveOutput);
-  saveButton.position(10, 40);
+  saveButton.position(130, 40);
   let refreshButton = createButton("Update Record")
   refreshButton.mousePressed(refreshDrawing)
-  refreshButton.position(90, 40)
+  refreshButton.position(10, 40)
+  
+  uploadButton.attribute("title", "Upload a .wav file here")
+  refreshButton.attribute("title", "Apply updated parameters to your existing record")
+  saveButton.attribute("title", "Save your current record as an SVG file")
   
 
   // Create controls
