@@ -23,8 +23,6 @@ let dpi = 1200;
 let waveform = [];
 let uploaded = false;
 let doDraw = false;
-let isAnalysing = false;
-let isDrawing = false;
 let svgContent = "";
 
 //scale pixel distances
@@ -81,19 +79,6 @@ function setup() {
 function draw() {
   background(255);
 
-  if (isAnalyzing) {
-    fill(0);
-    textSize(24);
-    text("Analyzing audio...", width / 2 - 100, height / 2);
-    return;
-  }
-
-  if (isDrawing) {
-    fill(0);
-    textSize(24);
-    text("Drawing record...", width / 2 - 100, height / 2);
-  }
-
   if (doDraw) {
     drawSpiralWaveform();
     isDrawing = false;
@@ -109,7 +94,6 @@ function saveOutput() {
 function handleFile(file) {
     if (file.type === 'audio') {
         uploadedFile = file;
-        isAnalysing = true;
         sound = loadSound(uploadedFile.data, analyzeAudio)
         loop()
     }
@@ -119,8 +103,6 @@ function analyzeAudio() {
   let duration = sound.duration();
   let numSamples = Math.floor(samplingRate * duration);
   peaks = sound.getPeaks(numSamples);
-  isAnalysing = false;
-  isDrawing = true;
   doDraw = true;
 }
 
